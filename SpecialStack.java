@@ -1,104 +1,101 @@
-
-import java.util.*;
-
-
-class MyStack {
-    Stack<Integer> s;
-    Integer minEle;
-
-
-    MyStack() { s = new Stack<Integer>(); }
-
-
-    void getMin()
+import java.util.Stack;
+ 
+class SpecialStack
+{
+    private Stack<Integer> s;        
+    private Stack<Integer> aux;      
+    public MinStack()
     {
-
-        if (s.isEmpty())
-            System.out.println("Stack is empty");
-
-
-        else
-            System.out.println("Minimum Element in the "  + " stack is: " + minEle);
+        s = new Stack<>();
+        aux = new Stack<>();
+    }
+    public void push(int val)
+    {
+        s.push(val);
+   
+        if (aux.isEmpty()) {
+            aux.push(val);
+        }
+        else {
+           
+            if (aux.peek() >= val) {
+                aux.push(val);
+            }
+        }
+    }
+ 
+    public int pop()
+    {
+        if (isEmpty())
+        {
+            System.out.println("Stack underflow!!");
+            System.exit(-1);
+        }
+ 
+        int top = s.pop();
+ 
+        if (top == aux.peek()) {
+            aux.pop();
+        }
+ 
+        return top;
+    }
+ 
+    public int top() {
+        return s.peek();
+    }
+ 
+    public int size() {
+        return s.size();
     }
 
-
-    void peek()
-    {
-        if (s.isEmpty()) {
-            System.out.println("Stack is empty ");
-            return;
-        }
-
-        Integer t = s.peek();
-
-        System.out.print("Top Most Element is: ");
-
-
-        if (t < minEle)
-            System.out.println(minEle);
-        else
-            System.out.println(t);
+    public boolean isEmpty() {
+        return s.isEmpty();
     }
 
-
-    void pop()
+    public int getMin()
     {
-        if (s.isEmpty()) {
-            System.out.println("Stack is empty");
-            return;
+        if (aux.isEmpty())
+        {
+            System.out.println("Stack underflow!!");
+            System.exit(-1);
         }
-
-        System.out.print("Top Most Element Removed: ");
-        Integer t = s.pop();
-
-        if (t < minEle) {
-            System.out.println(minEle);
-            minEle = 2 * minEle - t;
-        }
-
-        else
-            System.out.println(t);
+ 
+        return aux.peek();
     }
-
-    // Insert new number into MyStack
-    void push(Integer x)
+}
+ 
+class Main
+{
+    public static void main (String[] args)
     {
-        if (s.isEmpty()) {
-            minEle = x;
-            s.push(x);
-            System.out.println("Number Inserted: " + x);
-            return;
-        }
-
-        // If new number is less than original minEle
-        if (x < minEle) {
-            s.push(2 * x - minEle);
-            minEle = x;
-        }
-
-        else
-            s.push(x);
-
-        System.out.println("Number Inserted: " + x);
-    }
-};
-
-
-public class SpecialStack {
-    public static void main(String[] args)
-    {
-        MyStack s = new MyStack();
-
-       
-        s.push(3);
+        SpecialStack s = new SpecialStack();
+ 
+        s.push(6);
+        System.out.println(s.getMin());     
+ 
+        s.push(7);
+        System.out.println(s.getMin());    
+ 
+        s.push(8);
+        System.out.println(s.getMin());     
+ 
         s.push(5);
-        s.getMin();
-        s.push(2);
-        s.push(1);
-        s.getMin();
-        s.pop();
-        s.getMin();
-        s.pop();
-        s.peek();
+        System.out.println(s.getMin());     
+ 
+        s.push(3);
+        System.out.println(s.getMin());     
+ 
+        System.out.println(s.pop());    
+        System.out.println(s.getMin());     
+ 
+        s.push(10);
+        System.out.println(s.getMin());    
+ 
+        System.out.println(s.pop());     
+        System.out.println(s.getMin());    
+ 
+        System.out.println(s.pop());   
+        System.out.println(s.getMin());     
     }
 }
