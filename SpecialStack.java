@@ -1,6 +1,6 @@
 import java.util.Stack;
  
-class SpecialStack
+class MinStack
 {
     private Stack<Integer> s;        
     private Stack<Integer> aux;      
@@ -65,11 +65,11 @@ class SpecialStack
     }
 }
  
-class Main
+class SpecialStack
 {
     public static void main (String[] args)
     {
-        SpecialStack s = new SpecialStack();
+        MinStack s = new MinStack();
  
         s.push(6);
         System.out.println(s.getMin());     
