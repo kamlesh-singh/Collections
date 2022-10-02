@@ -10,8 +10,9 @@ public class Ans1 {
 
         float sum =0f;
 
-        for(float i : arr){
-            sum +=i;
+        Iterator<Float> itr = arr.iterator();
+        while(itr.hasNext()){
+            sum += itr.next();
         }
 
         System.out.println("Sum  : " + sum);
