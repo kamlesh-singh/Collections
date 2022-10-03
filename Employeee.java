@@ -14,6 +14,16 @@ public class Employeee
 
     }
 
+     @Override
+    public int hashCode() {
+        final int prime = 31;
+        int result = 1;
+        result = prime * result
+                +  this.name.hashCode() +
+                this.designation.hashCode();
+        return result;
+    }
+    
     @Override
     public String toString(){
         return "Name : " + this.name + "designation : " + designation + " age : " + age;
